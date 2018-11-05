@@ -1,5 +1,6 @@
-ToDo
+ function ToDo(tasks) {
+    tasks = [];
+ }
 
-tasks = [];
+ToDo.prototype = addTask() {}
 
-addTask
