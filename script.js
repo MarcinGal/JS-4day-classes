@@ -1,47 +1,49 @@
-function ToDo() {
-    this.tasks = []
+class ToDo {
+    constructor() {
+        this.tasks = []
+        this.render()
+    }
 
-    this.render()
-}
+    addTask(text) {
+        this.tasks.push(new Task(text))
 
-ToDo.prototype.addTask = function (text) {
-    this.tasks.push(new Task(text))
+        this.render()
+    }
+    render() {
+        document.body.innerHTML = ''
 
-    this.render()
-}
+        this.makeUI();
 
-ToDo.prototype.render = function () {
-    document.body.innerHTML = ''
+        const ul = document.createElement('ul')
+        document.body.appendChild(ul);
 
-    this.makeUI();
+        this.tasks.forEach(task => {
+            const li = document.createElement('li');
+            ul.appendChild(li);
+            li.innerText = task.text
 
-    const ul = document.createElement('ul')
-    document.body.appendChild(ul);
+        })
+    }
 
-    this.tasks.forEach(task => {
-        const li = document.createElement('li');
-        ul.appendChild(li);
-        li.innerText = task.text
+    makeUI() {
+        const input = document.createElement('input')
+        const button = document.createElement('button')
+        button.innerText = 'Kliknij mnie'
 
-    })
-}
-
-ToDo.prototype.makeUI = function(){
-    const input = document.createElement('input')
-    const button = document.createElement('button')
-    button.innerText = 'Kliknij mnie'
-
-    button.addEventListener(
-        'click',
-        () => this.addTask(input.value)
+        button.addEventListener(
+            'click',
+            () => this.addTask(input.value)
         )
 
         document.body.appendChild(input)
         document.body.appendChild(button)
+    }
 }
 
-function Task(text) {
-    this.text = text
+class Task {
+    constructor(text) {
+        this.text = text
+    }
 }
 
 const toDo1 = new ToDo()
